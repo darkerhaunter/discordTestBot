@@ -14,9 +14,13 @@ client.on('message', function(message) {
   if (message.content == "!clear") {
       try {
           if (message.member.hasPermission("MANAGE_MESSAGES")) {
-              messages = message.channel.fetchMessages();
-              message.channel.bulkDelete(messages);
+              messages = message.channel.messages.fetch;
+              message.channel.bulkDelete(messages.length+50);
               message.react("👍")
+              message.reply('Cleared messages')
+                .then(msg => {
+                  setTimeout(() => msg.delete(), 3000)
+                })
           }
       } catch(e) {
           message.channel.send("Error clearing channel");
