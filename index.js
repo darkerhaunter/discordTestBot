@@ -2,6 +2,8 @@ require('dotenv').config()
 //creating client
 const Discord = require('discord.js')
 const client = new Discord.Client();
+//prefix
+const prefix = "!";
 //deploying bot
 client.login(process.env.BOT_TOKEN)
 client.on("ready", () => {
@@ -28,5 +30,10 @@ client.on('message', function(message) {
           console.log(e);
           
       }
+  }
+});
+client.on("message", message => {
+  if(message.content.startsWith('${prefix}ping')){
+    message.channel.send("Pong")
   }
 });
